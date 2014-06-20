@@ -1,0 +1,50 @@
+---
+title       : Child Height Prediction
+subtitle    : Developing Data Products Course Project
+author      : 
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+---page 2
+## Data Set
+
+This preditcion algorithm uses galton data set in the library UsingR. 
+```{r}
+library(UsingR)
+summary(galton)
+```
+
+---page 3
+## Build the model
+
+A linear regression model is fit to the data.
+```{r}
+fit<-lm(child~parent, data=galton)
+summary(fit)
+```
+
+
+---page 4
+## Prediction
+
+The prediction model takes father height and mother height as input and convert them to parent height. Then parent height is used to predict child height.
+As the used data set has parent height range from 64 to 73, the prediction works when parent height is within that range.
+
+```{r}
+ChildHeight<-function(father,mother){
+    as.vector(predict(fit,data.frame(parent=mean(c(father,1.08*mother)))))
+    }
+```
+
+---page 5
+## Residual plot and model diagnose
+
+```{r}
+par(mfrow=c(2,2))
+plot(fit)
+```
+
+

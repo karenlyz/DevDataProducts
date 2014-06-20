@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Child Height Prediction</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Child Height Prediction">
+  <meta name="author" content="">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Child Height Prediction</h1>
+    <h2>Developing Data Products Course Project</h2>
+    <p><br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Data Set</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This preditcion algorithm uses galton data set in the library UsingR. </p>
+
+<pre><code class="r">library(UsingR)
+summary(galton)
+</code></pre>
+
+<pre><code>##      child          parent    
+##  Min.   :61.7   Min.   :64.0  
+##  1st Qu.:66.2   1st Qu.:67.5  
+##  Median :68.2   Median :68.5  
+##  Mean   :68.1   Mean   :68.3  
+##  3rd Qu.:70.2   3rd Qu.:69.5  
+##  Max.   :73.7   Max.   :73.0
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Build the model</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>A linear regression model is fit to the data.</p>
+
+<pre><code class="r">fit &lt;- lm(child ~ parent, data = galton)
+summary(fit)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = child ~ parent, data = galton)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -7.805 -1.366  0.049  1.634  5.926 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  23.9415     2.8109    8.52   &lt;2e-16 ***
+## parent        0.6463     0.0411   15.71   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.24 on 926 degrees of freedom
+## Multiple R-squared:  0.21,   Adjusted R-squared:  0.21 
+## F-statistic:  247 on 1 and 926 DF,  p-value: &lt;2e-16
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Prediction</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The prediction model takes father height and mother height as input and convert them to parent height. Then parent height is used to predict child height.
+As the used data set has parent height range from 64 to 73, the prediction works when parent height is within that range.</p>
+
+<pre><code class="r">ChildHeight &lt;- function(father, mother) {
+    as.vector(predict(fit, data.frame(parent = mean(c(father, 1.08 * mother)))))
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Residual plot and model diagnose</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">par(mfrow = c(2, 2))
+plot(fit)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-4.png" alt="plot of chunk unnamed-chunk-4"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Data Set'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Build the model'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Prediction'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Residual plot and model diagnose'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
