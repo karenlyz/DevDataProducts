@@ -76,6 +76,13 @@ summary(fit)
 
 - The prediction model takes father height and mother height as input and convert them to parent height. 
 - Then parent height is used to predict child height.
+
+```r
+ChildHeight <- function(father, mother) {
+    as.vector(predict(fit, data.frame(parent = mean(c(father, 1.08 * mother)))))
+}
+```
+
 - As the used data set has parent height range from 64 to 73, the prediction works when parent height is within that range.
 - Go to the websit [here](https://karenlyz.shinyapps.io/HW_Project/) to try out the application.
 
