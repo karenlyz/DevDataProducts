@@ -9,6 +9,15 @@ hitheme     : tomorrow      #
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 ---page 2
+
+## The idea
+
+- How tall your child will be when they grow up?
+- The height of a person is determined by a combination of many factors, such as genetics, nutrition, etc. 
+- However, genetics has been suggested by some studies to contribute 60%-80% to a person's height.
+- We have built a model to estimate child height based on parent height.
+
+---
 ## Data Set
 
 This preditcion algorithm uses galton data set in the library UsingR. 
@@ -65,27 +74,9 @@ summary(fit)
 ---page 4
 ## Prediction
 
-The prediction model takes father height and mother height as input and convert them to parent height. Then parent height is used to predict child height.
-As the used data set has parent height range from 64 to 73, the prediction works when parent height is within that range.
-
-
-```r
-ChildHeight <- function(father, mother) {
-    as.vector(predict(fit, data.frame(parent = mean(c(father, 1.08 * mother)))))
-}
-```
-
-
----page 5
-## Residual plot and model diagnose
-
-
-```r
-par(mfrow = c(2, 2))
-plot(fit)
-```
-
-![plot of chunk unnamed-chunk-4](assets/fig/unnamed-chunk-4.png) 
-
+- The prediction model takes father height and mother height as input and convert them to parent height. 
+- Then parent height is used to predict child height.
+- As the used data set has parent height range from 64 to 73, the prediction works when parent height is within that range.
+- Go to the websit [here](https://karenlyz.shinyapps.io/HW_Project/) to try out the application.
 
 

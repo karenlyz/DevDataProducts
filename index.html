@@ -43,6 +43,22 @@
     <!-- SLIDES -->
     <slide class="" id="slide-1" style="background:;">
   <hgroup>
+    <h2>The idea</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>How tall your child will be when they grow up?</li>
+<li>The height of a person is determined by a combination of many factors, such as genetics, nutrition, etc. </li>
+<li>However, genetics has been suggested by some studies to contribute 60%-80% to a person&#39;s height.</li>
+<li>We have built a model to estimate child height based on parent height.</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
     <h2>Data Set</h2>
   </hgroup>
   <article data-timings="">
@@ -65,7 +81,7 @@ summary(galton)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-2" style="background:;">
+<slide class="" id="slide-3" style="background:;">
   <hgroup>
     <h2>Build the model</h2>
   </hgroup>
@@ -100,33 +116,17 @@ summary(fit)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-3" style="background:;">
+<slide class="" id="slide-4" style="background:;">
   <hgroup>
     <h2>Prediction</h2>
   </hgroup>
   <article data-timings="">
-    <p>The prediction model takes father height and mother height as input and convert them to parent height. Then parent height is used to predict child height.
-As the used data set has parent height range from 64 to 73, the prediction works when parent height is within that range.</p>
-
-<pre><code class="r">ChildHeight &lt;- function(father, mother) {
-    as.vector(predict(fit, data.frame(parent = mean(c(father, 1.08 * mother)))))
-}
-</code></pre>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-4" style="background:;">
-  <hgroup>
-    <h2>Residual plot and model diagnose</h2>
-  </hgroup>
-  <article data-timings="">
-    <pre><code class="r">par(mfrow = c(2, 2))
-plot(fit)
-</code></pre>
-
-<p><img src="assets/fig/unnamed-chunk-4.png" alt="plot of chunk unnamed-chunk-4"> </p>
+    <ul>
+<li>The prediction model takes father height and mother height as input and convert them to parent height. </li>
+<li>Then parent height is used to predict child height.</li>
+<li>As the used data set has parent height range from 64 to 73, the prediction works when parent height is within that range.</li>
+<li>Go to the websit <a href="https://karenlyz.shinyapps.io/HW_Project/">here</a> to try out the application.</li>
+</ul>
 
   </article>
   <!-- Presenter Notes -->
@@ -138,25 +138,25 @@ plot(fit)
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title='Data Set'>
+        data-slide=1 title='The idea'>
          1
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='Build the model'>
+        data-slide=2 title='Data Set'>
          2
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=3 title='Prediction'>
+        data-slide=3 title='Build the model'>
          3
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='Residual plot and model diagnose'>
+        data-slide=4 title='Prediction'>
          4
       </a>
     </li>
